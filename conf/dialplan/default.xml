@@ -752,6 +752,18 @@
     </extension>
     -->
 
+<!--
+	XMPP Dingaling Catch-All to Local User Example
+    -->
+<!--
+    <extension name="jingle-loops">
+      <condition field="source" expression="mod_dingaling">
+          <action application="set" data="proxy_media=true"/>
+          <action application="bridge" data="sofia/${use_profile}/$1"/>
+      </condition>
+    </extension>
+-->
+
     <extension name="enum">
       <condition field="${module_exists(mod_enum)}" expression="true"/>
       <condition field="destination_number" expression="^(.*)$">
