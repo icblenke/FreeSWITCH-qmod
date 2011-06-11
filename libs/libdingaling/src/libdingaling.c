@@ -181,6 +181,8 @@ typedef struct ldl_feature ldl_feature_t;
 #define FEATURE_VERSION "jabber:iq:version"
 #define FEATURE_VCARD "vcard-temp"
 #define FEATURE_VOICE "http://www.google.com/xmpp/protocol/voice/v1"
+#define FEATURE_VIDEO "http://www.google.com/xmpp/protocol/video/v1"
+#define FEATURE_CAMERA "http://www.google.com/xmpp/protocol/camera/v1"
 #define FEATURE_LAST "jabber:iq:last"
 
 static ldl_feature_t FEATURES[] = { 
@@ -189,6 +191,8 @@ static ldl_feature_t FEATURES[] = {
 	{ FEATURE_VERSION, on_disco_default },
 	{ FEATURE_VCARD, on_vcard},
 	{ FEATURE_VOICE, on_disco_default },
+	{ FEATURE_VIDEO, on_disco_default },
+	{ FEATURE_CAMERA, on_disco_default },
 	{ FEATURE_LAST, on_disco_default },
 	{ NULL, NULL}
 };
@@ -435,6 +439,7 @@ static ldl_status parse_session_code(ldl_handle_t *handle, char *id, char *from,
 									if (rate) {
 										session->payloads[session->payload_len].rate = atoi(rate);
 									} else {
+                                         /* set to 90000 to allow video bitrates, on hold */
                                         session->payloads[session->payload_len].rate = 8000;
                                     }
 									session->payload_len++;
@@ -888,7 +893,7 @@ static void do_presence(ldl_handle_t *handle, char *from, char *to, char *type, 
 			if ((tag = iks_insert(pres, "c"))) {
 				iks_insert_attrib(tag, "node", "http://www.freeswitch.org/xmpp/client/caps");
 				iks_insert_attrib(tag, "ver", LDL_CAPS_VER);
-				iks_insert_attrib(tag, "ext", "sidebar voice-v1");
+				iks_insert_attrib(tag, "ext", "sidebar voice-v1 video-v1 camera-v1");
 				iks_insert_attrib(tag, "client", "libdingaling");
 				iks_insert_attrib(tag, "xmlns", "http://jabber.org/protocol/caps");
 			}
@@ -1100,7 +1105,7 @@ static int on_result(void *user_data, ikspak *pak)
 		ctag = iks_insert(msg, "c");
 		iks_insert_attrib(ctag, "node", "http://www.freeswitch.org/xmpp/client/caps");
 		iks_insert_attrib(ctag, "ver", "1.0.0.1");
-		iks_insert_attrib(ctag, "ext", "sidebar voice-v1");
+		iks_insert_attrib(ctag, "ext", "sidebar voice-v1 video-v1");
 		iks_insert_attrib(ctag, "client", "libdingaling");
 		iks_insert_attrib(ctag, "xmlns", "http://jabber.org/protocol/caps");
 
@@ -2253,6 +2258,21 @@ unsigned int ldl_session_describe(ldl_session_t *session,
 	
 
 	new_session_iq(session, &iq, &sess, &id, description == LDL_DESCRIPTION_ACCEPT ? "accept" : "initiate");
+        /* hardcoding video presentation to H264 CIF */
+        tag = iks_insert(sess, "vid:description");
+        iks_insert_attrib(tag, "xmlns:vid", "http://www.google.com/session/video");
+        payload = iks_insert(tag, "vid:payload-type");
+        iks_insert_attrib(payload, "id", "97");
+        iks_insert_attrib(payload, "name", "H264");
+        iks_insert_attrib(payload, "width", "352");
+        iks_insert_attrib(payload, "height", "288");
+        iks_insert_attrib(payload, "framerate", "30");
+        /* payload = iks_insert(tag, "vid:payload-type");
+        iks_insert_attrib(payload, "id", "98");
+        iks_insert_attrib(payload, "name", "H263");
+        iks_insert_attrib(payload, "width", "352");
+        iks_insert_attrib(payload, "height", "288");
+        iks_insert_attrib(payload, "framerate", "30") */
 	tag = iks_insert(sess, "pho:description");
 	iks_insert_attrib(tag, "xmlns:pho", "http://www.google.com/session/phone");
 	iks_insert_attrib(tag, "xml:lang", "en");
