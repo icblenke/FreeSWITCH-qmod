@@ -27,6 +27,8 @@
  *
  * libdingaling.c -- Main Library Code
  *
+ * QMOD: XMPP Video Signaling + Presentation (video-v1 & camera-v1)
+ *
  */
 
 #ifndef  _MSC_VER
