@@ -956,7 +956,6 @@ AC_CONFIG_FILES([Makefile
 		src/mod/endpoints/mod_skinny/Makefile
 		src/mod/endpoints/mod_skypopen/Makefile
 		src/mod/endpoints/mod_sofia/Makefile
-                src/mod/endpoints/mod_dingaling/Makefile
 		src/mod/formats/mod_portaudio_stream/Makefile
 		src/mod/asr_tts/mod_unimrcp/Makefile
 		src/mod/languages/mod_java/Makefile
@@ -1101,3 +1100,4 @@ echo "      runtimedir:      ${runtimedir}"
 echo "      logfiledir:      ${logfiledir}"
 echo ""
 echo "------------------------------------------------------------------------------"
+src/mod/endpoints/mod_sofia/Makefile
