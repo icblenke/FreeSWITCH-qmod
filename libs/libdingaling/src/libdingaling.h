@@ -88,7 +88,7 @@ struct ldl_candidate {
 };
 typedef struct ldl_candidate ldl_candidate_t;
 
-/*! \brief A structure to store a jingle payload */
+/*! \brief A structure to store a jingle audio payload */
 struct ldl_payload {
 	/*! the iana name of the payload type */
 	char *name;
@@ -100,6 +100,21 @@ struct ldl_payload {
 	unsigned int bps;
 };
 typedef struct ldl_payload ldl_payload_t;
+
+/*! \brief A structure to store a jingle video payload */
+struct ldl_vpayload {
+	/*! the iana name of the video payload type */
+	char *name;
+	/*! the iana id of the video payload type */
+	unsigned int id;
+	/*! the width of the video payload type */
+	unsigned int width;
+	/*! the width of the video payload type */
+	unsigned int height;
+	/*! the framerate of the video payload type */
+	unsigned int framerate;
+};
+typedef struct ldl_vpayload ldl_vpayload_t;
 
 struct ldl_handle;
 typedef struct ldl_handle ldl_handle_t;
