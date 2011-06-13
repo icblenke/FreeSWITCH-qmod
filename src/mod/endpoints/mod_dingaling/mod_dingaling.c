@@ -78,7 +78,8 @@ typedef enum {
 	TFLAG_TERM = (1 << 21),
 	TFLAG_TRANSPORT_ACCEPT = (1 << 22),
 	TFLAG_READY = (1 << 23),
-	TFLAG_NAT_MAP = (1 << 24)
+	TFLAG_NAT_MAP = (1 << 24),
+	TFLAG_VIDEO = (1 << 25)
 } TFLAGS;
 
 typedef enum {
@@ -1316,6 +1317,7 @@ static switch_status_t channel_on_hangup(switch_core_session_t *session)
 
 	switch_clear_flag_locked(tech_pvt, TFLAG_IO);
 	switch_clear_flag_locked(tech_pvt, TFLAG_VOICE);
+	switch_clear_flag_locked(tech_pvt, TFLAG_VIDEO);
 	switch_set_flag_locked(tech_pvt, TFLAG_BYE);
 
 	/* Dunno why, but if googletalk calls us for the first time, as soon as the call ends
@@ -1350,6 +1352,7 @@ static switch_status_t channel_kill_channel(switch_core_session_t *session, int 
 	case SWITCH_SIG_KILL:
 		switch_clear_flag_locked(tech_pvt, TFLAG_IO);
 		switch_clear_flag_locked(tech_pvt, TFLAG_VOICE);
+		switch_clear_flag_locked(tech_pvt, TFLAG_VIDEO);
 		switch_set_flag_locked(tech_pvt, TFLAG_BYE);
 
 		if (switch_rtp_ready(tech_pvt->rtp_session)) {
