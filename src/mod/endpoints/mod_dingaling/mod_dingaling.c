@@ -149,6 +149,8 @@ struct private_object {
 	switch_codec_t read_codec;
 	switch_codec_t write_codec;
 	switch_frame_t read_frame;
+	switch_codec_t vid_read_codec;
+	switch_codec_t vid_write_codec;
 	mdl_profile_t *profile;
 	switch_core_session_t *session;
 	switch_caller_profile_t *caller_profile;
