@@ -1,11 +1,11 @@
  include("inc_answer.js");
-   include("inc_logger.js");
+ include("inc_logger.js");
    
-   use("TeleTone");
-   use("etpan");
+  use("TeleTone");
+  use("etpan");
    
   // * video-answer-machine.js
-  // * Acript by M.Z. which was
+  // * A mod by M. Zeena which is
   // * Based on a script by Joshua Engelbrecht which was
   // * Based on Mike B. Murdock script which was
   // * Based on original samples by Anthony Minessale II
@@ -96,7 +96,7 @@
       if(vMGF.isFile) {
          rtn = session.play_fsv(vMailGreetingFile, on_dtmf, "");
       } else {
-         session.sayPhrase("speak", "Please leave a message after the beep", "en");
+         session.sayPhrase("speak", "Please leave a message after the tone", "en");
       }
       fsLogger("session.play_fsv rtn=[" + rtn + "]");
    

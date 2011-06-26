@@ -8,7 +8,7 @@
        session.answer();
    
        session.execute("sleep","2000");
-       session.sayPhrase("speak", "welcome to the  v m listen application", "en");
+       session.sayPhrase("speak", "Welcome to the freeswitch videomail application", "en");
    
        var dir = new File(vmMessageDir + "/" + vmAccount);
    
@@ -61,7 +61,7 @@
                var vmMessageMeta = fileName + ".meta";
                var infoObj = metaFileRead(vmAccount,fileName);
                currentNewNum++;
-               dtmf = session.sayPhrase("speak", "Message " + currentNewNum + " Recieved on " + infoObj.createdDate + " at " + infoObj.createdTime
+               dtmf = session.sayPhrase("speak", "Video Message " + currentNewNum + " Recieved on " + infoObj.createdDate + " at " + infoObj.createdTime
                   + " from " + validateNull(infoObj.callerName) + ", press 1 to play,  press 2 to skip,  press 3 to delete  ", "en", menu_dtmf, "");
                session.execute("sleep","1000");
                if (dtmf == "1") {
@@ -96,20 +96,20 @@
                    messagePlay(vmAccount,fileName);
                }
                if (dtmf == "2") {
-                   session.sayPhrase("speak", "Skipping this message ", "en");
+                   session.sayPhrase("speak", "Skipping message ", "en");
                }
                if (dtmf == "3") {
                    messageDelete(vmAccount,fileName);
                }
                session.execute("sleep","2000");
            }
-           session.sayPhrase("speak", "This is the end of your old messages ", "en");
+           session.sayPhrase("speak", "No more old messages ", "en");
        } else {
            session.sayPhrase("speak", "No old messages ", "en");
        }
    
        session.execute("sleep","1000");
-       session.sayPhrase("speak", "this is the end of the application", "en");
+       session.sayPhrase("speak", "Thanks for using this application", "en");
        session.execute("sleep","1000");
        session.sayPhrase("speak", "Good bye", "en");
        session.hangup;

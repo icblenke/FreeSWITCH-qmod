@@ -1,0 +1,7 @@
+<include>
+  <extension name="inum gateway">
+    <condition field="destination_number" expression="^883?(\d+)$">
+      <action application="bridge" data="sofia/${use_profile}/$1@inum.net"/>
+    </condition>
+  </extension>
+</include>

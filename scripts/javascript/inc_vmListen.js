@@ -72,7 +72,7 @@
        delFile.remove();
        var delFile = File(vmMessageDir + "/" + vmAccount + "/" + fileName + ".meta");
        delFile.remove();
-       session.sayPhrase("speak", "this message has been deleted", "en");
+       session.sayPhrase("speak", "message deleted", "en");
    }
    
    function messageHeard(metaObj) {
@@ -93,7 +93,7 @@
    
    function messagePlay(vmAccount,fileName) {
        var vmMessageWav = fileName + ".fsv";
-       session.sayPhrase("NowPlaying", i+1,"en");
+       session.sayPhrase("Now Playing", i+1,"en");
        session.play_fsv(vmMessageDir + "/" + vmAccount + "/" +  vmMessageWav, play_dtmf, "", 0);
        fsLogger(i +" FILE ", fileName);
    }
@@ -139,7 +139,7 @@
    
    function messagePlay(vmAccount,fileName) {
        var vmMessageWav = fileName + ".fsv";
-       session.sayPhrase("NowPlaying", i+1,"en");
+       session.sayPhrase("Now Playing", i+1,"en");
        session.play_fsv(vmMessageDir + "/" + vmAccount + "/" +  vmMessageWav, play_dtmf, "", 0);
        fsLogger(i +" FILE ", fileName);
    }

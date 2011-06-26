@@ -1,0 +1,16 @@
+<include>
+  <extension name="vvmail_play">
+    <condition field="destination_number" expression="^(vmplay)$"/>
+    <condition field="${module_exists(mod_spidermonkey)}" expression="true"/>
+    <condition field="${module_exists(mod_pocketsphinx)}" expression="true">
+      <action application="javascript" data="vmListen.js"/>
+    </condition>
+  </extension>
+   <extension name="vmail_rec">
+    <condition field="destination_number" expression="^(vmrec)$"/>
+    <condition field="${module_exists(mod_spidermonkey)}" expression="true"/>
+    <condition field="${module_exists(mod_pocketsphinx)}" expression="true">
+      <action application="javascript" data="answer.js"/>
+    </condition>
+  </extension>
+</include>
