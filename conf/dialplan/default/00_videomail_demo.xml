@@ -3,6 +3,7 @@
     <condition field="destination_number" expression="^(vmplay)$"/>
     <condition field="${module_exists(mod_spidermonkey)}" expression="true"/>
     <condition field="${module_exists(mod_pocketsphinx)}" expression="true">
+	<action application="export" data="nolocal:absolute_codec_string=PCMA,PCMU,H263-1998"/>
       <action application="javascript" data="vmListen.js"/>
     </condition>
   </extension>
@@ -10,6 +11,7 @@
     <condition field="destination_number" expression="^(vmrec)$"/>
     <condition field="${module_exists(mod_spidermonkey)}" expression="true"/>
     <condition field="${module_exists(mod_pocketsphinx)}" expression="true">
+	<action application="export" data="nolocal:absolute_codec_string=PCMA,PCMU,H263-1998"/>
       <action application="javascript" data="answer.js"/>
     </condition>
   </extension>
